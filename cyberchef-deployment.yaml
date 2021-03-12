@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cyberchef-deployment
+  labels:
+    name: cyberchef-deployment
+    app: cyberchef
+  namespace: cyberchef-space
+spec:
+  selector:
+    matchLabels:
+      app: cyberchef
+      name: cyberchef-pod
+
+  template:
+    metadata:
+      name: cyberchef-pod
+      labels:
+        app: cyberchef
+        name: cyberchef-pod
+    spec:
+      containers:
+        - image: mikaelkarlman/cyberchef
+          name: cyberchef-container
+          ports:
+            - containerPort: 8080
+              protocol: TCP
